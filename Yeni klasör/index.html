@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SURİYELİ LÖRO</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    overflow-x: hidden;
+}
+
+/* Her foto full ekran */
+.section {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Başlık */
+h1 {
+    position: fixed;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 8vw;
+    text-shadow: 2px 2px 10px black;
+    z-index: 10;
+}
+
+/* Yazılar */
+.yazi {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 5vw;
+    color: white;
+}
+
+/* Arapça korku */
+.arapca {
+    position: fixed;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font-size: 7vw;
+    color: red;
+    opacity: 0;
+    text-shadow: 0 0 20px black, 0 0 40px red;
+}
+
+/* Başlat butonu */
+#baslat {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    font-size: 20px;
+    z-index: 20;
+}
+</style>
+</head>
+
+<body>
+
+<h1>SURİYELİ LÖRO</h1>
+
+<button id="baslat">BASLA 😈</button>
+
+<div class="yazi" id="yazi"></div>
+<div class="arapca" id="arapca"></div>
+
+<!-- FOTOĞRAFLAR -->
+<div class="section" style="background-image: url('1.jpg')"></div>
+<div class="section" style="background-image: url('2.jpg')"></div>
+<div class="section" style="background-image: url('3.jpg')"></div>
+<div class="section" style="background-image: url('4.jpg')"></div>
+<div class="section" style="background-image: url('5.jpg')"></div>
+
+<audio id="muzik" loop>
+    <source src="muzik.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="korkuSes">
+    <source src="korku.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// başlat
+document.getElementById("baslat").onclick = function() {
+    document.getElementById("muzik").play();
+    this.style.display = "none";
+};
+
+// yazılar
+const yazilar = [
+    "Kaydır aşağı 😈",
+    "Korkmaya hazır ol 😏",
+    "Arkanda biri olabilir 👀",
+    "Devam et 😂",
+    "Çıkamazsın 😈"
+];
+
+let i = 0;
+setInterval(() => {
+    document.getElementById("yazi").innerText = yazilar[i];
+    i = (i + 1) % yazilar.length;
+}, 3000);
+
+// korku yazısı
+const arapca = [
+    "أنا أراك...",
+    "لا تهرب...",
+    "انتبه..."
+];
+
+setInterval(() => {
+    if(Math.random() > 0.6){
+        let div = document.getElementById("arapca");
+        div.innerText = arapca[Math.floor(Math.random()*arapca.length)];
+        div.style.opacity = 1;
+
+        document.getElementById("korkuSes").play();
+
+        setTimeout(()=> div.style.opacity = 0, 1500);
+    }
+}, 5000);
+
+</script>
+
+</body>
+</html>
